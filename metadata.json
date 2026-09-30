@@ -1,65 +1,18 @@
 [
   {
-    "Name": "Sakura",
-    "Author": "morieeattonkatsu",
-    "GitHubAuthorUrl": "https://github.com/rukamori",
-    "Link": "",
-    "Id": "5847",
-    "Source": "sakura_morieeattonkatsu_5847.svg",
-    "Submission": "submissions/Sakura_Chartreux.svg"
+    "Id": "flora_cognitiveshadows03",
+    "Name": "Flora",
+    "Author": "cognitiveshadows03",
+    "Source": "Flora.svg",
+    "Link": "https://github.com/cognitiveshadows03/IconPack",
+    "GitHubAuthorUrl": "https://github.com/cognitiveshadows03"
   },
   {
-    "Id": "104570",
-    "Name": "Marin Kitagawa",
-    "Author": "raspweed",
-    "Source": "marin_kitagawa_raspweed_104570.svg",
-    "Submission": "submissions/raspweed.svg",
-    "Link": "https://github.com/raspweed/IconPack",
-    "GitHubAuthorUrl": "https://github.com/raspweed"
-  },
-  {
-    "Id": "950492",
-    "Name": "Frostwave - Japanese Winter",
-    "Author": "Animesh",
-    "Source": "frostwave_japanese_winter_animesh_950492.svg",
-    "Submission": "submissions/Frostwave.svg",
-    "Link": "",
-    "GitHubAuthorUrl": "https://github.com/agupta07505"
-  },
-  {
-    "Id": "417667",
-    "Name": "Suzume",
-    "Author": "Animesh",
-    "Source": "suzume_animesh_417667.svg",
-    "Submission": "submissions/Suzume.svg",
-    "Link": "",
-    "GitHubAuthorUrl": "https://github.com/agupta07505"
-  },
-  {
-    "Id": "152487",
-    "Name": "Sakura Retro",
-    "Author": "morrieeattonkatsu",
-    "Source": "sakura_retro_morrieeattonkatsu_152487.svg",
-    "Submission": "submissions/SakuraRetro.svg",
-    "Link": "",
-    "GitHubAuthorUrl": "https://github.com/rukamori"
-  },
-  {
-    "Id": "944391",
-    "Name": "pixelart",
-    "Author": "BunglonMewing",
-    "Source": "pixelart_bunglonmewing_944391.svg",
-    "Submission": "submissions/pixelart.svg",
-    "Link": "https://github.com/BunglonMewing/IconPack",
-    "GitHubAuthorUrl": "https://github.com/BunglonMewing"
-  },
-  {
-    "Id": "801991",
-    "Name": "Hatsune Miku",
-    "Author": "ValteMCPE",
-    "Source": "hatsune_miku_valtemcpe_801991.svg",
-    "Submission": "submissions/hatsunemiku.svg",
-    "Link": "https://github.com/ValteMCPE/IconPack",
-    "GitHubAuthorUrl": "https://github.com/ValteMCPE"
+    "Id": "panda_cognitiveshadows03",
+    "Name": "Panda",
+    "Author": "cognitiveshadows03",
+    "Source": "Panda.svg",
+    "Link": "https://github.com/cognitiveshadows03/IconPack",
+    "GitHubAuthorUrl": "https://github.com/cognitiveshadows03"
   }
 ]
