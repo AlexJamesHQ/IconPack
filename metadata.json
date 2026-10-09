@@ -48,10 +48,8 @@
     "GitHubAuthorUrl": "https://github.com/cognitiveshadows03"
   }
 {
-"icons": [
-{
-"name": "Anime Girl",
-"author": "AlexJamesHQ",
-"file": "submissions/Anime Girl.svg",
-"link": "https://github.com/AlexJamesHQ/IconPack"
+  "name": "Anime Girl",
+  "author": "AlexJamesHQ",
+  "file": "Anime Girl.svg",
+  "link": "https://github.com/AlexJamesHQ/IconPack"
 }
