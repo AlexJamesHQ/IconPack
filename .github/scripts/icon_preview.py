@@ -12,7 +12,9 @@ from urllib.request import Request, urlopen
 
 
 COMMENT_MARKER = "<!-- icon-pack-generated-previews -->"
-IDENTIFIER_PATTERN = re.compile(r"\d{4}|\d{6}")
+# 5-digit ids are legacy: the icons added before this pipeline existed carry them, and the
+# pack build accepts any id that is not the reserved default, so the previews must too.
+IDENTIFIER_PATTERN = re.compile(r"\d{4,6}")
 
 
 class PreviewError(Exception):
