@@ -7,12 +7,15 @@ import re
 import subprocess
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
 COMMENT_MARKER = "<!-- icon-pack-generated-previews -->"
-IDENTIFIER_PATTERN = re.compile(r"\d{4}|\d{6}")
+# 5-digit ids are legacy: the icons added before this pipeline existed carry them, and the
+# pack build accepts any id that is not the reserved default, so the previews must too.
+IDENTIFIER_PATTERN = re.compile(r"\d{4,6}")
 
 
 class PreviewError(Exception):
@@ -186,8 +189,15 @@ def github_request(
     try:
         with urlopen(request, timeout=30) as response:
             response_body = response.read()
+    except HTTPError as error:
+        # The API's own message is the useful part of a refusal, and it is not in the exception.
+        detail = error.read().decode("utf-8", "replace").strip()
+        raise PreviewError(
+            f"GitHub API request failed: {method} {url} -> "
+            f"{error.code} {error.reason}: {detail}"
+        ) from error
     except OSError as error:
-        raise PreviewError(f"GitHub API request failed: {error}") from error
+        raise PreviewError(f"GitHub API request failed: {method} {url} -> {error}") from error
     if not response_body:
         return None
     return json.loads(response_body)
@@ -249,19 +259,9 @@ def post_comment(args: argparse.Namespace) -> None:
         f"https://api.github.com/repos/{args.repository}/issues/"
         f"{args.pull_request}/comments"
     )
-    authenticated_user = github_request(
-        "GET",
-        "https://api.github.com/user",
-        args.token,
-    )
-    authenticated_login = (
-        authenticated_user.get("login")
-        if isinstance(authenticated_user, dict)
-        else None
-    )
-    if not isinstance(authenticated_login, str) or not authenticated_login:
-        raise PreviewError("Cannot determine the authenticated GitHub user.")
-
+    # The marker is what identifies this script's comment, and it is the only thing that can:
+    # a workflow token may not read /user at all ("Resource not accessible by integration"), so
+    # looking the author up refused every comment this ran as the repository's own token.
     existing_comment_id = None
     page = 1
     while True:
@@ -273,16 +273,7 @@ def post_comment(args: argparse.Namespace) -> None:
         if not isinstance(comments, list):
             raise PreviewError("GitHub returned an invalid comment response.")
         for comment in comments:
-            comment_user = comment.get("user")
-            comment_login = (
-                comment_user.get("login")
-                if isinstance(comment_user, dict)
-                else None
-            )
-            if (
-                comment_login == authenticated_login
-                and COMMENT_MARKER in str(comment.get("body", ""))
-            ):
+            if COMMENT_MARKER in str(comment.get("body", "")):
                 existing_comment_id = comment.get("id")
                 break
         if existing_comment_id is not None or len(comments) < 100:
